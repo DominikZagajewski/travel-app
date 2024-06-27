@@ -1,0 +1,60 @@
+{
+    "id": "1",
+    "name": "Meet Camp Nou",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Camp_Nou_aerial_%28cropped%29.jpg/480px-Camp_Nou_aerial_%28cropped%29.jpg",
+    "descriprion": "asd",
+    "price": "5000 EUR",
+    "duration": "3",
+    "location": "Barcelona, Spain",
+    "rating": "3.5"
+},
+{
+    "id": "2",
+    "name": "Meet Emirates Stadium",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/Outsideemirates.jpg/480px-Outsideemirates.jpg",
+    "descriprion": "asd",
+    "price": "3000 GBP",
+    "duration": "3",
+    "location": "London, UK",
+    "rating": "5.0"
+},
+{
+    "id": "3",
+    "name": "Meet Croke Park",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Croke_park_all_ireland.jpg/480px-Croke_park_all_ireland.jpg",
+    "descriprion": "asd",
+    "price": "1000 PLEURN",
+    "duration": "3",
+    "location": "Dublin, Irland",
+    "rating": "2.9"
+},
+{
+    "id": "4",
+    "name": "Meet Stadio Olimpico",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/Stadio_Olimpico_2008.JPG/480px-Stadio_Olimpico_2008.JPG",
+    "descriprion": "asd",
+    "price": "1000 EUR",
+    "duration": "3",
+    "location": "Rome, Italy",
+    "rating": "4.5"
+},
+{
+    "id": "5",
+    "name": "Meet Meet Parc OL",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Parc_OL.jpg/480px-Parc_OL.jpg",
+    "descriprion": "asd",
+    "price": "1000 EUR",
+    "duration": "3",
+    "location": "Lyon, France",
+    "rating": "4.5"
+},
+{
+    "id": "6",
+    "name": "Meet Allianz Arena",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/M%C3%BCnchen_-_Allianz-Arena_%28Luftbild%29.jpg/480px-M%C3%BCnchen_-_Allianz-Arena_%28Luftbild%29.jpg",
+    "descriprion": "asd",
+    "price": "1000 EUR",
+    "duration": "3",
+    "location": "Monachium, Germany",
+    "rating": "4.5"
+}
