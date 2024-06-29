@@ -1,14 +1,28 @@
-import { View, Text, StyleSheet, Touchable, Image } from "react-native";
-import React from "react";
+import { View, Text, StyleSheet, Image } from "react-native";
+import React, { useState } from "react";
 import { Stack } from "expo-router";
-import { TextInput, TouchableOpacity } from "react-native-gesture-handler";
+import {
+  ScrollView,
+  TextInput,
+  TouchableOpacity,
+} from "react-native-gesture-handler";
 import { Ionicons } from "@expo/vector-icons";
 import Colors from "@/constants/Colors";
 import { useHeaderHeight } from "@react-navigation/elements";
-import Destinations from "@/components/Destinations";
+import Listings from "@/components/Listings";
+import listingData from "@/data/destenations.json";
+import RecoList from "@/components/RecoList";
+import reco from "@/data/reco.json";
 
 const Page = () => {
   const headerHeight = useHeaderHeight();
+  const [category, setCategory] = useState("All");
+
+  const onCatChanged = (category: string) => {
+    console.log("Category: ", category);
+    setCategory(category);
+  };
+
   return (
     <>
       <Stack.Screen
@@ -44,21 +58,20 @@ const Page = () => {
           ),
         }}
       />
-      <View style={(styles.container, { paddingTop: headerHeight })}>
-        <Text style={styles.headingTxt}>
-          {" "}
-          {/* <br />
-          Hi! .... <br /> */}
-          Where we going?
-        </Text>
-
-        <View>
-          <View style={styles.searchBar}>
-            <Ionicons name="search" size={18} />
-            <TextInput placeholder="Search" />
+      <View style={[styles.container, { paddingTop: headerHeight }]}>
+        <ScrollView showsVerticalScrollIndicator={false}>
+          <Text style={styles.headingTxt}>Where are we going?</Text>
+          <View>
+            <View style={styles.searchBar}>
+              <Ionicons name="search" size={18} />
+              <TextInput placeholder="Search" style={{ flex: 1 }} />
+            </View>
           </View>
-        </View>
-        <Destinations listings={listingData} />
+
+          <Text style={styles.recommendationTitle}>Popular Destinations</Text>
+          <Listings listings={listingData} category={category} />
+          <RecoList listings={reco} />
+        </ScrollView>
       </View>
     </>
   );
@@ -74,7 +87,7 @@ const styles = StyleSheet.create({
   },
   headingTxt: {
     fontSize: 20,
-    fontWeight: 800,
+    fontWeight: "800",
     color: Colors.black,
     marginTop: 0,
   },
@@ -83,5 +96,13 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.white,
     padding: 10,
     borderRadius: 5,
+    alignItems: "center",
+    marginBottom: 10,
+  },
+  recommendationTitle: {
+    fontSize: 20,
+    fontWeight: "600",
+    color: Colors.black,
+    marginBottom: 10,
   },
 });
