@@ -1,11 +1,14 @@
-import { View, Text, StyleSheet, Image } from "react-native";
-import React, { useState } from "react";
-import { Stack } from "expo-router";
 import {
-  ScrollView,
+  View,
+  Text,
+  StyleSheet,
+  Image,
   TextInput,
   TouchableOpacity,
-} from "react-native-gesture-handler";
+  ScrollView,
+} from "react-native";
+import React, { useState } from "react";
+import { Stack } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import Colors from "@/constants/Colors";
 import { useHeaderHeight } from "@react-navigation/elements";
@@ -13,10 +16,12 @@ import Listings from "@/components/Listings";
 import listingData from "@/data/destenations.json";
 import RecoList from "@/components/RecoList";
 import reco from "@/data/reco.json";
+import { useDarkMode } from "@/app/DarkModeContext";
 
 const Page = () => {
   const headerHeight = useHeaderHeight();
   const [category, setCategory] = useState("All");
+  const { isDarkMode } = useDarkMode();
 
   const onCatChanged = (category: string) => {
     console.log("Category: ", category);
@@ -58,17 +63,53 @@ const Page = () => {
           ),
         }}
       />
-      <View style={[styles.container, { paddingTop: headerHeight }]}>
+      <View
+        style={[
+          styles.container,
+          { paddingTop: headerHeight },
+          isDarkMode ? styles.containerDark : styles.containerLight,
+        ]}
+      >
         <ScrollView showsVerticalScrollIndicator={false}>
-          <Text style={styles.headingTxt}>Where are we going?</Text>
+          <Text
+            style={[
+              styles.headingTxt,
+              isDarkMode ? styles.textDark : styles.textLight,
+            ]}
+          >
+            Where are we going?
+          </Text>
           <View>
-            <View style={styles.searchBar}>
-              <Ionicons name="search" size={18} />
-              <TextInput placeholder="Search" style={{ flex: 1 }} />
+            <View
+              style={[
+                styles.searchBar,
+                isDarkMode ? styles.searchBarDark : styles.searchBarLight,
+              ]}
+            >
+              <Ionicons
+                name="search"
+                size={18}
+                color={isDarkMode ? Colors.white : Colors.black}
+              />
+              <TextInput
+                placeholder="Search"
+                placeholderTextColor={isDarkMode ? Colors.white : Colors.black}
+                style={{
+                  flex: 1,
+                  color: isDarkMode ? Colors.white : Colors.black,
+                }}
+              />
             </View>
           </View>
 
-          <Text style={styles.recommendationTitle}>Popular Destinations</Text>
+          <Text
+            style={[
+              styles.recommendationTitle,
+              isDarkMode ? styles.textDark : styles.textLight,
+            ]}
+          >
+            Popular Destinations
+          </Text>
           <Listings listings={listingData} category={category} />
           <RecoList listings={reco} />
         </ScrollView>
@@ -83,26 +124,40 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingHorizontal: 20,
+  },
+  containerLight: {
     backgroundColor: Colors.bgColor,
+  },
+  containerDark: {
+    backgroundColor: Colors.black,
   },
   headingTxt: {
     fontSize: 20,
     fontWeight: "800",
-    color: Colors.black,
     marginTop: 0,
+  },
+  textLight: {
+    color: Colors.black,
+  },
+  textDark: {
+    color: Colors.white,
   },
   searchBar: {
     flexDirection: "row",
-    backgroundColor: Colors.white,
     padding: 10,
     borderRadius: 5,
     alignItems: "center",
     marginBottom: 10,
   },
+  searchBarLight: {
+    backgroundColor: Colors.white,
+  },
+  searchBarDark: {
+    backgroundColor: Colors.gray,
+  },
   recommendationTitle: {
     fontSize: 20,
     fontWeight: "600",
-    color: Colors.black,
     marginBottom: 10,
   },
 });

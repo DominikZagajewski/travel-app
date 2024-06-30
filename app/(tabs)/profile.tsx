@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   View,
   Text,
@@ -11,12 +11,13 @@ import {
 import Colors from "@/constants/Colors";
 import { Ionicons } from "@expo/vector-icons";
 import { Stack } from "expo-router";
+import { useDarkMode } from "@/app/DarkModeContext";
 
 const Profile = () => {
-  const [isDarkMode, setIsDarkMode] = useState(false);
+  const { isDarkMode, toggleDarkMode } = useDarkMode();
 
-  const toggleDarkMode = () => {
-    setIsDarkMode((previousState) => !previousState);
+  const handleLogout = () => {
+    Alert.alert("Logged Out", "You have been logged out.");
   };
 
   return (
@@ -79,6 +80,7 @@ const Profile = () => {
             styles.logoutButton,
             isDarkMode ? styles.logoutButtonDark : styles.logoutButtonLight,
           ]}
+          onPress={handleLogout}
         >
           <Text
             style={[

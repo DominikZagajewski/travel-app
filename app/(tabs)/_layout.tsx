@@ -1,21 +1,23 @@
-import { View, Text, StyleSheet } from "react-native";
 import React from "react";
 import { Tabs } from "expo-router";
-import { FontAwesome, Ionicons, MaterialIcons } from "@expo/vector-icons";
+import { FontAwesome, Ionicons } from "@expo/vector-icons";
 import Colors from "@/constants/Colors";
+import { DarkModeProvider, useDarkMode } from "@/app/DarkModeContext";
 
-export default function Layout() {
+const Layout = () => {
+  const { isDarkMode } = useDarkMode();
+
   return (
     <Tabs
       screenOptions={{
         tabBarStyle: {
-          backgroundColor: Colors.bgColor,
+          backgroundColor: isDarkMode ? Colors.black : Colors.bgColor,
           borderTopWidth: 0,
           padding: 0,
         },
         tabBarShowLabel: false,
-        tabBarActiveTintColor: Colors.black,
-        tabBarInactiveTintColor: "#999",
+        tabBarActiveTintColor: isDarkMode ? Colors.white : Colors.black,
+        tabBarInactiveTintColor: isDarkMode ? "#666" : "#999",
       }}
     >
       <Tabs.Screen
@@ -37,4 +39,14 @@ export default function Layout() {
       />
     </Tabs>
   );
-}
+};
+
+const AppLayout = () => {
+  return (
+    <DarkModeProvider>
+      <Layout />
+    </DarkModeProvider>
+  );
+};
+
+export default AppLayout;
