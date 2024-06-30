@@ -18,6 +18,10 @@ const Profile = () => {
 
   const handleLogout = () => {
     Alert.alert("Logged Out", "You have been logged out.");
+<<<<<<< HEAD
+=======
+    // Here you can add logic for logging out the user
+>>>>>>> 016f814aee4d5e5b6726960de3978b4ba0d47a59
   };
 
   return (
