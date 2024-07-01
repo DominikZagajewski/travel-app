@@ -1,4 +1,5 @@
 import React from "react";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { Tabs } from "expo-router";
 import { FontAwesome, Ionicons } from "@expo/vector-icons";
 import Colors from "@/constants/Colors";
@@ -28,7 +29,6 @@ const Layout = () => {
           ),
         }}
       />
-
       <Tabs.Screen
         name="profile"
         options={{
@@ -43,9 +43,11 @@ const Layout = () => {
 
 const AppLayout = () => {
   return (
-    <DarkModeProvider>
-      <Layout />
-    </DarkModeProvider>
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <DarkModeProvider>
+        <Layout />
+      </DarkModeProvider>
+    </GestureHandlerRootView>
   );
 };
 

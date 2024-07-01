@@ -3,15 +3,9 @@ import React from "react";
 import { Stack, useLocalSearchParams, useRouter } from "expo-router";
 import listingData from "@/data/destenations.json";
 import { TouchableOpacity } from "react-native-gesture-handler";
-import {
-  Feather,
-  FontAwesome,
-  FontAwesome5,
-  Ionicons,
-} from "@expo/vector-icons";
+import { Feather } from "@expo/vector-icons";
 import Colors from "@/constants/Colors";
 import { ListingType } from "@/components/types/listingTypes";
-
 import Animated, {
   SlideInDown,
   interpolate,
@@ -19,18 +13,17 @@ import Animated, {
   useAnimatedStyle,
   useScrollViewOffset,
 } from "react-native-reanimated";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 const { width } = Dimensions.get("window");
 const IMG_HEIGHT = 300;
 
 const ListingDetails = () => {
   const { id } = useLocalSearchParams();
-  const listing: ListingType | undefined = (listingData as ListingType[]).find(
-    (item) => item.id === id
-  );
-
+  const listing: ListingType | undefined = (
+    listingData as unknown as ListingType[]
+  ).find((item) => item.id === id);
   const router = useRouter();
-
   const scrollRef = useAnimatedRef<Animated.ScrollView>();
   const scrollOffset = useScrollViewOffset(scrollRef);
   const imageAnimatedStyle = useAnimatedStyle(() => {
@@ -63,7 +56,7 @@ const ListingDetails = () => {
   }
 
   return (
-    <>
+    <GestureHandlerRootView style={{ flex: 1 }}>
       <Stack.Screen
         options={{
           headerTransparent: true,
@@ -71,21 +64,9 @@ const ListingDetails = () => {
           headerLeft: () => (
             <TouchableOpacity
               onPress={() => router.back()}
-              style={{
-                backgroundColor: "rgba(255, 255, 255, 0.5)",
-                borderRadius: 10,
-                padding: 4,
-              }}
+              style={styles.headerLeftButton}
             >
-              <View
-                style={{
-                  backgroundColor: Colors.white,
-                  padding: 6,
-                  borderRadius: 10,
-                }}
-              >
-                <Feather name="arrow-left" size={20} />
-              </View>
+              <Feather name="arrow-left" size={24} color={Colors.black} />
             </TouchableOpacity>
           ),
         }}
@@ -102,57 +83,12 @@ const ListingDetails = () => {
           <View style={styles.contentWrapper}>
             <Text style={styles.listingName}>{listing.name}</Text>
             <View style={styles.listingLocationWrapper}>
-              <FontAwesome5
-                name="map-marker-alt"
-                size={18}
-                color={Colors.primaryColor}
-              />
               <Text style={styles.listingLocationTxt}>{listing.location}</Text>
             </View>
-
-            <View style={styles.highlightWrapper}>
-              <View style={{ flexDirection: "row" }}>
-                <View style={styles.highlightIcon}>
-                  <Ionicons name="time" size={18} color={Colors.primaryColor} />
-                </View>
-                <View>
-                  <Text style={styles.highlightTxt}>Duration</Text>
-                  <Text style={styles.highlightTxtVal}>
-                    {listing.duration} Days
-                  </Text>
-                </View>
-              </View>
-              <View style={{ flexDirection: "row" }}>
-                <View style={styles.highlightIcon}>
-                  <FontAwesome
-                    name="users"
-                    size={18}
-                    color={Colors.primaryColor}
-                  />
-                </View>
-                <View>
-                  <Text style={styles.highlightTxt}>Person</Text>
-                  <Text style={styles.highlightTxtVal}>
-                    {listing.persons || ""}
-                  </Text>
-                </View>
-              </View>
-              <View style={{ flexDirection: "row" }}>
-                <View style={styles.highlightIcon}>
-                  <Ionicons name="star" size={18} color={Colors.primaryColor} />
-                </View>
-                <View>
-                  <Text style={styles.highlightTxt}>Rating</Text>
-                  <Text style={styles.highlightTxtVal}>{listing.rating}</Text>
-                </View>
-              </View>
-            </View>
-
             <Text style={styles.listingDetails}>{listing.description}</Text>
           </View>
         </Animated.ScrollView>
       </View>
-
       <Animated.View style={styles.footer} entering={SlideInDown.delay(200)}>
         <TouchableOpacity
           onPress={() => {}}
@@ -164,7 +100,7 @@ const ListingDetails = () => {
           <Text style={styles.footerBtnTxt}>${listing.price}</Text>
         </TouchableOpacity>
       </Animated.View>
-    </>
+    </GestureHandlerRootView>
   );
 };
 
@@ -200,27 +136,6 @@ const styles = StyleSheet.create({
     marginLeft: 5,
     color: Colors.black,
   },
-  highlightWrapper: {
-    flexDirection: "row",
-    marginVertical: 20,
-    justifyContent: "space-between",
-  },
-  highlightIcon: {
-    backgroundColor: "#F4F4F4",
-    paddingHorizontal: 8,
-    paddingVertical: 5,
-    borderRadius: 8,
-    marginRight: 5,
-    alignItems: "center",
-  },
-  highlightTxt: {
-    fontSize: 12,
-    color: "#999",
-  },
-  highlightTxtVal: {
-    fontSize: 14,
-    fontWeight: "600",
-  },
   listingDetails: {
     fontSize: 16,
     color: Colors.black,
@@ -252,5 +167,12 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: "600",
     textTransform: "uppercase",
+  },
+  headerLeftButton: {
+    backgroundColor: "rgba(255, 255, 255, 0.8)",
+    borderRadius: 10,
+    padding: 10,
+    marginLeft: 10,
+    marginTop: 10,
   },
 });

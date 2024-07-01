@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -15,10 +15,6 @@ import { useDarkMode } from "@/app/DarkModeContext";
 
 const Profile = () => {
   const { isDarkMode, toggleDarkMode } = useDarkMode();
-
-  const handleLogout = () => {
-    Alert.alert("Logged Out", "You have been logged out.");
-  };
 
   return (
     <>
@@ -80,7 +76,6 @@ const Profile = () => {
             styles.logoutButton,
             isDarkMode ? styles.logoutButtonDark : styles.logoutButtonLight,
           ]}
-          onPress={handleLogout}
         >
           <Text
             style={[
